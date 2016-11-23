@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 // components
-import TodoListContainer from './TodoListContainer';
+import TodoListContainer from './TodoList/TodoListContainer';
 
 /**
  * Main presentation component.

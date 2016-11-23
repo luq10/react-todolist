@@ -1,10 +1,10 @@
 import React from 'react';
 
 // models
-import Task from '../models/Task';
+import Task from '../../models/Task';
 
 // components
-import DateTime from './DateTime';
+import DateTime from '../DateTime';
 
 /**
  * Presentation component for showing list of tasks

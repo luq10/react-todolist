@@ -1,11 +1,14 @@
 import React from 'react';
 
 // models
-import Task from '../models/Task';
+import Task from '../../models/Task';
 
 // components
 import TodoList from './TodoList';
 import TodoListAddButton from './TodoListAddButton';
+
+// styles
+import './TodoListContainer.scss';
 
 export default class TodoListContainer extends React.Component {
   static propTypes = {
@@ -42,7 +45,7 @@ export default class TodoListContainer extends React.Component {
    */
   render() {
     return (
-      <div>
+      <div className="todoList-container">
         <TodoList tasks={this.state.tasks}/>
         <TodoListAddButton onSubmit={this.addTask.bind(this)}/>
       </div>
