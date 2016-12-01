@@ -20,8 +20,11 @@ describe('Task', function() {
 
   it('should have correct created date', function(){
     let task = Task.create('foo');
-    let date = new Date();
+    let now = new Date();
 
-    expect(+task.created).toBe(+date);
+    let date    = Math.ceil(now / 10);
+    let created = Math.ceil(task.created / 10);
+
+    expect(date).toBe(created);
   });
 });

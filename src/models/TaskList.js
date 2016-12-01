@@ -8,6 +8,31 @@ export default class TaskList {
   }
 
   /**
+   * Get length of list
+   *
+   * @return {Number}
+   */
+  get length() {
+    return this.tasks.length;
+  }
+
+  /**
+   * Get task from index
+   *
+   * @param {Number} index
+   * @return {Task|*}
+   */
+  get(index) {
+    let task = this.tasks[index];
+
+    if(!task){
+      throw new Error('Index parameter is incorrect');
+    }
+
+    return task;
+  }
+
+  /**
    * Add new task on end of array
    *
    * @param {Task} task
@@ -26,7 +51,7 @@ export default class TaskList {
    */
   removeByIndex(index){
     if(index > this.tasks.length - 1){
-      return new Error('Index parameter is incorrect');
+      throw new Error('Index parameter is incorrect');
     }
 
     this.tasks.splice(index, 1);
@@ -38,18 +63,54 @@ export default class TaskList {
    *
    * @param {Number} idTask
    * @return {this}
-   * @todo
    */
   removeById(idTask){
+    let index = this.findIndex(idTask);
 
+    if(false === index){
+      throw new Error('Task don`t exist in this tasklist');
+    }
+
+    this.tasks.splice(index, 1);
+    return this;
   }
 
   /**
+   * Find task by id
    *
    * @param {Number} idTask
-   * @todo
    */
   find(idTask){
+    let task;
 
+    for(let i = 0, ilen = this.tasks.length; i < ilen; i++){
+      let task = this.tasks[i];
+
+      if(task.id === idTask){
+        return task;
+      }
+    }
+
+    return false;
+  }
+
+  /**
+   * Find index of task by id
+   *
+   * @param {Number} idTask
+   */
+  findIndex(idTask){
+    let task;
+
+    for(let i = 0, ilen = this.tasks.length; i < ilen; i++){
+      let task = this.tasks[i];
+
+      if(task.id === idTask){
+        return i;
+      }
+    }
+
+    return false;
   }
 }
+
