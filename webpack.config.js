@@ -27,5 +27,27 @@ module.exports = {
         loaders: ['style', 'css', 'sass']
       }
     ]
+  },
+
+  // For unit test
+  test: {
+    module: {
+      loaders: [
+        {
+          test: /\.js$/,
+          loaders: ['babel'],
+          include: path.join(__dirname, 'src')
+        },
+        {
+          test: /\.scss$/,
+          loaders: ['style', 'css', 'sass']
+        },
+        {
+          test: /\.spec.js$/,
+          loaders: ['babel'],
+          include: path.join(__dirname, 'test')
+        }
+      ]
+    }
   }
 };

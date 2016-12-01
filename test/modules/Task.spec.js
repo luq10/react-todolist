@@ -1,4 +1,4 @@
-const Task = require('../../src/models/Task');
+import Task from '../../src/models/Task';
 
 describe('Task', function() {
   it('test', function(){

@@ -1,42 +1,26 @@
-const path = require('path');
-const webpack = require('webpack');
 const webpackConfig = require('./webpack.config');
 
 module.exports = function(config) {
   config.set({
     files: [
-      'test/test.js'
+      'webpack.tests.js'
     ],
-
-    frameworks: ['jasmine'],
-
     preprocessors: {
-      'test/test.js': ['webpack']
+      'webpack.tests.js': ['webpack']
     },
-
+    frameworks: ['jasmine'],
     reporters: ['progress'],
-
-    colors: true,
-
     logLevel: config.LOG_INFO,
-
+    colors: true,
     autoWatch: true,
-
     singleRun: false,
-
     concurrency: Infinity,
-
     browsers: ['PhantomJS'],
-
-    webpack: {
-      module: webpackConfig.module
-    },
-
+    webpack: webpackConfig.test,
     plugins: [
       require('karma-webpack'),
       require('karma-jasmine'),
-      require('karma-phantomjs-launcher'),
-      new webpack.HotModuleReplacementPlugin(),
+      require('karma-phantomjs-launcher')
     ]
   });
 };
