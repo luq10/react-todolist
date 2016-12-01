@@ -10,7 +10,7 @@ import React from 'react';
  */
 const DateTime = (props) => {
   return (
-    <span>{props.date.toLocaleString()}</span>
+    <span className="datetime">{props.date.toLocaleString()}</span>
   );
 };
 

@@ -1,26 +1,22 @@
 .todoList-container {
-  margin: 0 auto;
-  width: 450px;
+  margin: 20px auto;
+  width: 600px;
 
   ul {
     list-style: none;
-    margin: 0;
-    padding: 0;
-  }
+    margin: 20px 0;
 
-  form {
-    input {
-      width: 300px;
-      font-size: 16px;
-      padding: 7px 10px;
-      margin: 0;
-    }
+    li {
+      padding: 10px;
 
-    button {
-      height: 36px;
-      margin: 0;
-      padding: 0 20px;
-      width: 126px;
+      &:hover {
+        background: #eee;
+      }
+
+      .datetime {
+        color: #999;
+        font-size: 0.8em;
+      }
     }
   }
 }

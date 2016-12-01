@@ -16,14 +16,16 @@ import DateTime from '../DateTime';
  */
 const TodoList = (props) => {
   return (
-    <ul>
+    <ul className="list-unstyled">
       {
         props.taskList.getAll().map((task) => {
           return (
             <li key={task.id}>
-              <span>{task.text}</span> |
-              <DateTime date={task.created}/>
-              <button onClick={props.onRemove.bind(this, task)}>Usuń</button>
+              <div>
+                <DateTime date={task.created}/>
+                <button className="btn btn-danger btn-xs pull-right" onClick={props.onRemove.bind(this, task)}>Usuń</button>
+              </div>
+              <span>{task.text}</span>
             </li>
           );
         })

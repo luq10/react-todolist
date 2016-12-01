@@ -9,6 +9,8 @@ import TaskListProvider from '../services/TaskListProvider';
 // components
 import TodoListContainer from './TodoList/TodoListContainer';
 
+import '../assets/styles/styles.scss';
+
 /**
  * Main presentation component.
  *

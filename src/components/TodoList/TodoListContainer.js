@@ -13,7 +13,7 @@ import './TodoListContainer.scss';
 
 export default class TodoListContainer extends React.Component {
   static propTypes = {
-    taskList: React.PropTypes.instanceOf(TaskList)
+    taskList: React.PropTypes.instanceOf(TaskList).isRequired
   };
 
   /**
@@ -62,8 +62,8 @@ export default class TodoListContainer extends React.Component {
   render() {
     return (
       <div className="todoList-container">
-        <TodoList taskList={this.state.taskList} onRemove={this.removeTask.bind(this)}/>
         <TodoListAddButton onSubmit={this.addTask.bind(this)}/>
+        <TodoList taskList={this.state.taskList} onRemove={this.removeTask.bind(this)}/>
       </div>
     );
   }

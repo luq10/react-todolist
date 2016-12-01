@@ -50,8 +50,12 @@ export default class TodoListAddButton extends React.Component {
   render() {
     return (
       <form onSubmit={(e) => this.onSubmit(e)}>
-        <input type="text" ref={(element) => this.input = element}/>
-        <button type="submit">Dodaj</button>
+        <div className="input-group">
+          <input type="text" className="form-control input-lg" ref={(element) => this.input = element} />
+          <span className="input-group-btn">
+            <button className="btn btn-success btn-lg" type="submit">Dodaj</button>
+          </span>
+        </div>
       </form>
     );
   }
