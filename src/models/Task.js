@@ -1,12 +1,6 @@
-export default class Task {
-  /**
-   * Id iterator
-   *
-   * @private
-   * @type {Number}
-   */
-  static _ID = 0;
+import uuid from 'node-uuid';
 
+export default class Task {
   /**
    *
    * @param {Number} id
@@ -22,21 +16,12 @@ export default class Task {
   }
 
   /**
-   * Get next id for new task
-   *
-   * @return {Number}
-   */
-  static getNextId() {
-    return ++Task._ID;
-  }
-
-  /**
    * Create new task
    *
    * @param {String} text
    * @return {Task}
    */
   static create(text) {
-    return new Task(Task.getNextId(), text, new Date(), false);
+    return new Task(uuid.v4(), text, new Date(), false);
   }
 }
