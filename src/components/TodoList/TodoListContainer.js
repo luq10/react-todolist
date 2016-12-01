@@ -3,6 +3,9 @@ import React from 'react';
 // models
 import Task from '../../models/Task';
 
+// services
+import TaskListProvider from '../../services/TaskListProvider';
+
 // components
 import TodoList from './TodoList';
 import TodoListAddButton from './TodoListAddButton';
@@ -24,18 +27,21 @@ export default class TodoListContainer extends React.Component {
     super(props);
 
     this.state = {
-      tasks: props.data || []
+      tasks: props.data || TaskListProvider.get()
     };
   }
 
   /**
    *
    * @param {String} text
-   * @todo: Save in localstorage
    */
   addTask(text) {
+    let task = Task.create(text);
+
+    TaskListProvider.add(task);
+
     this.setState((prevState) => ({
-      tasks: prevState.tasks.concat([Task.create(text)])
+      tasks: prevState.tasks.concat([task])
     }));
   };
 
