@@ -1,5 +1,11 @@
 import React, {Component} from 'react';
 
+// models
+import TodoList from '../models/TaskList';
+
+// services
+import TaskListProvider from '../services/TaskListProvider';
+
 // components
 import TodoListContainer from './TodoList/TodoListContainer';
 
@@ -10,8 +16,10 @@ import TodoListContainer from './TodoList/TodoListContainer';
  * @constructor
  */
 const App = () => {
+  let taskList = new TodoList(TaskListProvider);
+
   return (
-    <TodoListContainer />
+    <TodoListContainer taskList={taskList} />
   );
 };
 

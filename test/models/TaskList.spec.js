@@ -1,38 +1,23 @@
 import TaskList from '../../src/models/TaskList';
 import Task from '../../src/models/Task';
 
+import TaskListProviderMock from '../services/TaskListProvider.mock';
+
 describe('TaskList', function() {
+  beforeEach(function(){
+    TaskListProviderMock.clear();
+  });
+
   it('should be empty when init by empty array', function(){
-    let taskList = new TaskList([]);
+    let taskList = new TaskList(TaskListProviderMock);
 
     expect(taskList.length).toBe(0);
-  });
-
-  it('should be empty when init by no param', function(){
-    let taskList = new TaskList();
-
-    expect(taskList.length).toBe(0);
-  });
-
-  it('should have correct length when init by array of tasks', function(){
-    let taskList1 = new TaskList([
-      Task.create('first'),
-      Task.create('second')
-    ]);
-    let taskList2 = new TaskList([
-      Task.create('first'),
-      Task.create('second'),
-      Task.create('third')
-    ]);
-
-    expect(taskList1.length).toBe(2);
-    expect(taskList2.length).toBe(3);
   });
 
   it('should have correct length when add and remove tasks', function(){
-    let taskList = new TaskList([
-      Task.create('first')
-    ]);
+    let taskList = new TaskList(TaskListProviderMock);
+
+    taskList.add(Task.create('first'));
 
     expect(taskList.length).toBe(1);
 
@@ -48,7 +33,8 @@ describe('TaskList', function() {
   });
 
   it('should get task by index', function(){
-    let taskList = new TaskList();
+    let taskList = new TaskList(TaskListProviderMock);
+
     let task1    = Task.create('first');
     let task2    = Task.create('second');
 
@@ -62,9 +48,9 @@ describe('TaskList', function() {
   });
 
   it('should throw error when try removeByIndex non exist task', function(){
-    let taskList = new TaskList([
-      Task.create('first')
-    ]);
+    let taskList = new TaskList(TaskListProviderMock);
+
+    taskList.add(Task.create('first'));
 
     expect(taskList.removeByIndex.bind(taskList, 1)).toThrowError(Error, 'Index parameter is incorrect');
     expect(taskList.removeByIndex.bind(taskList, 2)).toThrowError(Error, 'Index parameter is incorrect');
@@ -72,7 +58,7 @@ describe('TaskList', function() {
   });
 
   it('should find correctly task by id', function(){
-    let taskList  = new TaskList();
+    let taskList  = new TaskList(TaskListProviderMock);
     let task1     = Task.create('first');
     let task2     = Task.create('second');
 
@@ -86,7 +72,7 @@ describe('TaskList', function() {
   });
 
   it('should find correctly index of task', function(){
-    let taskList  = new TaskList();
+    let taskList  = new TaskList(TaskListProviderMock);
     let task1     = Task.create('first');
     let task2     = Task.create('second');
 
@@ -100,7 +86,7 @@ describe('TaskList', function() {
   });
 
   it('should correct remove task', function(){
-    let taskList  = new TaskList();
+    let taskList  = new TaskList(TaskListProviderMock);
     let task1     = Task.create('first');
     let task2     = Task.create('second');
     let task3     = Task.create('third');

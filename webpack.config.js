@@ -39,11 +39,7 @@ module.exports = {
           include: path.join(__dirname, 'src')
         },
         {
-          test: /\.scss$/,
-          loaders: ['style', 'css', 'sass']
-        },
-        {
-          test: /\.spec.js$/,
+          test: /(\.spec\.js|\.mock\.js)$/,
           loaders: ['babel'],
           include: path.join(__dirname, 'test')
         }

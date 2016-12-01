@@ -7,14 +7,14 @@ describe('TaskListProvider', function() {
   });
 
   it('should return empty array when nothing in storage', function(){
-    expect(TaskListProvider.get()).toEqual([]);
+    expect(TaskListProvider.getAll()).toEqual([]);
   });
 
   it('should can add task', function(){
     TaskListProvider.add(Task.create('first'));
     TaskListProvider.add(Task.create('second'));
 
-    expect(TaskListProvider.get().length).toEqual(2);
+    expect(TaskListProvider.getAll().length).toEqual(2);
   });
 
   it('should can remove task', function(){
@@ -26,11 +26,11 @@ describe('TaskListProvider', function() {
     TaskListProvider.add(task2);
     TaskListProvider.add(task3);
 
-    expect(TaskListProvider.get().length).toEqual(3);
+    expect(TaskListProvider.getAll().length).toEqual(3);
 
     TaskListProvider.removeByIndex(1);
 
-    let data = TaskListProvider.get();
+    let data = TaskListProvider.getAll();
 
     expect(data[0].id).toBe(task1.id);
     expect(data[1].id).toBe(task3.id);

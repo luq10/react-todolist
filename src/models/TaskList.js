@@ -1,10 +1,10 @@
 export default class TaskList {
   /**
    *
-   * @param {Task[]} [tasks]
+   * @param {TaskListProvider} provider
    */
-  constructor(tasks) {
-    this.tasks = tasks || [];
+  constructor(provider) {
+    this.provider = provider;
   }
 
   /**
@@ -13,17 +13,25 @@ export default class TaskList {
    * @return {Number}
    */
   get length() {
-    return this.tasks.length;
+    return this.provider.getAll().length;
+  }
+
+  /**
+   *
+   * @returns {Task[]}
+   */
+  getAll(){
+    return this.provider.getAll();
   }
 
   /**
    * Get task from index
    *
    * @param {Number} index
-   * @return {Task|*}
+   * @return {Task}
    */
   get(index) {
-    let task = this.tasks[index];
+    let task = this.provider.getAll()[index];
 
     if(!task){
       throw new Error('Index parameter is incorrect');
@@ -39,7 +47,7 @@ export default class TaskList {
    * @return {this}
    */
   add(task) {
-    this.tasks.push(task);
+    this.provider.add(task);
     return this;
   }
 
@@ -50,11 +58,11 @@ export default class TaskList {
    * @return {this}
    */
   removeByIndex(index){
-    if(index > this.tasks.length - 1){
+    if(index > this.length - 1){
       throw new Error('Index parameter is incorrect');
     }
 
-    this.tasks.splice(index, 1);
+    this.provider.removeByIndex(index);
     return this;
   }
 
@@ -71,8 +79,7 @@ export default class TaskList {
       throw new Error('Task don`t exist in this tasklist');
     }
 
-    this.tasks.splice(index, 1);
-    return this;
+    return this.removeByIndex(index);
   }
 
   /**
@@ -81,10 +88,10 @@ export default class TaskList {
    * @param {Number} idTask
    */
   find(idTask){
-    let task;
+    let data = this.provider.getAll();
 
-    for(let i = 0, ilen = this.tasks.length; i < ilen; i++){
-      let task = this.tasks[i];
+    for(let i = 0, ilen = data.length; i < ilen; i++){
+      let task = data[i];
 
       if(task.id === idTask){
         return task;
@@ -100,10 +107,10 @@ export default class TaskList {
    * @param {Number} idTask
    */
   findIndex(idTask){
-    let task;
+    let data = this.provider.getAll();
 
-    for(let i = 0, ilen = this.tasks.length; i < ilen; i++){
-      let task = this.tasks[i];
+    for(let i = 0, ilen = data.length; i < ilen; i++){
+      let task = data[i];
 
       if(task.id === idTask){
         return i;

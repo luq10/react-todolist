@@ -1,7 +1,7 @@
 import React from 'react';
 
 // models
-import Task from '../../models/Task';
+import TaskList from '../../models/TaskList';
 
 // components
 import DateTime from '../DateTime';
@@ -18,12 +18,12 @@ const TodoList = (props) => {
   return (
     <ul>
       {
-        props.tasks.map((task) => {
+        props.taskList.getAll().map((task) => {
           return (
             <li key={task.id}>
-              <input type="checkbox"/>
               <span>{task.text}</span> |
               <DateTime date={task.created}/>
+              <button onClick={props.onRemove.bind(this, task)}>Usuń</button>
             </li>
           );
         })
@@ -33,7 +33,8 @@ const TodoList = (props) => {
 };
 
 TodoList.propTypes = {
-  tasks: React.PropTypes.arrayOf(React.PropTypes.instanceOf(Task)).isRequired
+  taskList: React.PropTypes.instanceOf(TaskList).isRequired,
+  onRemove: React.PropTypes.func.isRequired
 };
 
 export default TodoList;

@@ -1,10 +1,8 @@
 import React from 'react';
 
 // models
+import TaskList from '../../models/TaskList';
 import Task from '../../models/Task';
-
-// services
-import TaskListProvider from '../../services/TaskListProvider';
 
 // components
 import TodoList from './TodoList';
@@ -15,19 +13,19 @@ import './TodoListContainer.scss';
 
 export default class TodoListContainer extends React.Component {
   static propTypes = {
-    tasks: React.PropTypes.arrayOf(React.PropTypes.instanceOf(Task))
+    taskList: React.PropTypes.instanceOf(TaskList)
   };
 
   /**
    *
    * @param {Object} props
-   * @param {Task[]} [props.tasks=[]]
+   * @param {TaskList} [props.taskList]
    */
   constructor(props) {
     super(props);
 
     this.state = {
-      tasks: props.data || TaskListProvider.get()
+      taskList: props.taskList
     };
   }
 
@@ -38,11 +36,23 @@ export default class TodoListContainer extends React.Component {
   addTask(text) {
     let task = Task.create(text);
 
-    TaskListProvider.add(task);
+    this.setState((prevState) => {
+      return {
+        taskList: prevState.taskList.add(task)
+      }
+    });
+  };
 
-    this.setState((prevState) => ({
-      tasks: prevState.tasks.concat([task])
-    }));
+  /**
+   *
+   * @param {String} task
+   */
+  removeTask(task) {
+    this.setState((prevState) => {
+      return {
+        taskList: prevState.taskList.removeById(task.id)
+      }
+    });
   };
 
   /**
@@ -52,7 +62,7 @@ export default class TodoListContainer extends React.Component {
   render() {
     return (
       <div className="todoList-container">
-        <TodoList tasks={this.state.tasks}/>
+        <TodoList taskList={this.state.taskList} onRemove={this.removeTask.bind(this)}/>
         <TodoListAddButton onSubmit={this.addTask.bind(this)}/>
       </div>
     );
