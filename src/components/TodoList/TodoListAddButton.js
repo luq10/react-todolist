@@ -32,7 +32,14 @@ export default class TodoListAddButton extends React.Component {
   onSubmit(e) {
     e.preventDefault();
 
-    this.props.onSubmit(this.input.value);
+    let value = this.input.value;
+
+    if(!value){
+      // Disable submit empty text
+      return;
+    }
+
+    this.props.onSubmit(value);
     this.clear();
   }
 
