@@ -15,7 +15,6 @@ describe('Task', function() {
     expect(task.id).not.toBe(undefined);
     expect(task.text).toBe('foo');
     expect(task.created instanceof Date).toBe(true);
-    expect(task.isDone).toBe(false);
   });
 
   it('should have correct created date', function(){
