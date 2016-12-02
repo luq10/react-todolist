@@ -1,4 +1,5 @@
 import store from 'store';
+import Task from '../models/Task';
 
 export default class TaskListProvider {
   static STORE_KEY = '$task-list';
@@ -17,9 +18,9 @@ export default class TaskListProvider {
 
     this.data = store.get(this.STORE_KEY) || [];
 
-    // Restore Date object
-    this.data.forEach(task => {
-      task.created = new Date(task.created);
+    // Create model objects
+    this.data = this.data.map(task => {
+      return new Task(task.id, task.text, task.created);
     });
 
     return this.data;

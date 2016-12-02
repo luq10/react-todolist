@@ -5,14 +5,12 @@ export default class Task {
    *
    * @param {Number} id
    * @param {String} text
-   * @param {Date} created
-   * @param {Boolean} isDone
+   * @param {Date|String} created
    */
-  constructor(id, text, created, isDone) {
+  constructor(id, text, created) {
     this.id = id;
     this.text = text;
-    this.created = created;
-    this.isDone = isDone;
+    this.created = (typeof created === 'string') ? new Date(created) : created;
   }
 
   /**
@@ -22,6 +20,6 @@ export default class Task {
    * @return {Task}
    */
   static create(text) {
-    return new Task(uuid.v4(), text, new Date(), false);
+    return new Task(uuid.v4(), text, new Date());
   }
 }
